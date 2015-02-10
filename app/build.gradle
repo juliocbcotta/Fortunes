@@ -1,0 +1,105 @@
+buildscript {
+    repositories {
+        maven { url 'http://download.crashlytics.com/maven' }
+    }
+
+    dependencies {
+        classpath 'com.crashlytics.tools.gradle:crashlytics-gradle:1.14.7'
+    }
+}
+apply plugin: 'com.android.application'
+apply plugin: 'crashlytics'
+
+repositories {
+    maven { url 'http://download.crashlytics.com/maven' }
+}
+
+
+android {
+    compileSdkVersion rootProject.ext.compileSdkVersion
+    buildToolsVersion rootProject.ext.buildToolsVersion
+
+    defaultConfig {
+        applicationId "com.linux.fortunes.app"
+        minSdkVersion rootProject.ext.minSdkVersion
+        targetSdkVersion rootProject.ext.targetSdkVersion
+        versionCode rootProject.ext.versionCode
+        versionName rootProject.ext.versionName
+    }
+
+    compileOptions {
+        sourceCompatibility rootProject.ext.sourceCompatibility
+        targetCompatibility rootProject.ext.targetCompatibility
+    }
+
+    signingConfigs {
+        release {
+            def Properties keyProps = new Properties()
+            keyProps.load(new FileInputStream(file('../signing.properties')))
+            storeFile file(keyProps["storeFile"])
+            keyAlias keyProps["keyAlias"]
+            storePassword keyProps["storePassword"]
+            keyPassword keyProps["keyPassword"]
+        }
+    }
+
+    productFlavors {
+        brazilian {
+            applicationId android.defaultConfig.applicationId + ".brazilian"
+        }
+        bulgarian {
+            applicationId android.defaultConfig.applicationId + ".bulgarian"
+        }
+        czechslovak {
+            applicationId android.defaultConfig.applicationId + ".czechslovak"
+        }
+        english {
+            applicationId android.defaultConfig.applicationId + ".english"
+        }
+        esperanto {
+            applicationId android.defaultConfig.applicationId + ".esperanto"
+        }
+        french {
+            applicationId android.defaultConfig.applicationId + ".french"
+        }
+        german {
+            applicationId android.defaultConfig.applicationId + ".german"
+        }
+        irish {
+            applicationId android.defaultConfig.applicationId + ".irish"
+        }
+        italian {
+            applicationId android.defaultConfig.applicationId + ".italian"
+        }
+        polish {
+            applicationId android.defaultConfig.applicationId + ".polish"
+        }
+        russian {
+            applicationId android.defaultConfig.applicationId + ".russian"
+        }
+        spanish {
+            applicationId android.defaultConfig.applicationId + ".spanish"
+        }
+    }
+
+    buildTypes {
+        release {
+            minifyEnabled false
+            proguardFiles getDefaultProguardFile('proguard-android.txt'), 'proguard-rules.pro'
+            signingConfig signingConfigs.release
+        }
+
+        debug {
+            minifyEnabled false
+            proguardFiles getDefaultProguardFile('proguard-android.txt'), 'proguard-rules.pro'
+        }
+    }
+}
+
+dependencies {
+    compile fileTree(dir: 'libs', include: ['*.jar'])
+    compile 'com.android.support:appcompat-v7:21.0.3'
+    compile 'com.crashlytics.android:crashlytics:1.1.13'
+    compile 'com.facebook.android:facebook-android-sdk:3.21.1'
+    compile 'com.readystatesoftware.systembartint:systembartint:1.0.3'
+}

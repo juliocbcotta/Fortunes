@@ -1,0 +1,6 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+
+    <string name="app_name" translatable="false">English Fortunes</string>
+    <string name="facebook_app_id" translatable="false">416533111834396</string>
+</resources>

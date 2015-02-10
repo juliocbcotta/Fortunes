@@ -1,0 +1,24 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <string name="app_name" translatable="false">Fortunes</string>
+    <string name="action_new">new</string>
+    <string name="facebook_app_id" translatable="false">774148115997961</string>
+    <string name="app_store" translatable="false">https://play.google.com/store/apps/details?id={applicationId}</string>
+    <string name="app_store_pic_url" translatable="false">https://dl.dropboxusercontent.com/u/1605373/fortunes/{applicationId}/ic_launcher.png</string>
+    <string name="share" translatable="false">Share</string>
+    <string name="facebook_main_package" translatable="false">com.facebook.katana</string>
+    <string name="facebook_messenger_main_package" translatable="false">com.facebook.orca</string>
+    <string name="google_plus_main_package" translatable="false">com.google.android.apps.plus</string>
+    <string name="hangouts_main_package" translatable="false">com.google.android.talk</string>
+    <string name="linkedin_main_package" translatable="false">com.linkedin.android</string>
+    <string name="twitter_main_package" translatable="false">com.twitter.android</string>
+    <string name="viber_main_package" translatable="false">com.viber.voip</string>
+    <string name="wechat_main_package" translatable="false">com.tencent.mm</string>
+    <string name="whatsapp_main_package" translatable="false">com.whatsapp</string>
+    <string name="social_network_app_not_found" translatable="false">Social network app not found!</string>
+    <string name="not_fortune_loaded_yet" translatable="false">No fortune loaded yet</string>
+    <string name="failed_to_share" translatable="false">Failed to share</string>
+    <string name="facebook_messenger_not_installed_or_outdated" translatable="false">Facebook messenger not installed or outdated</string>
+    <string name="facebook_not_installed_or_outdated" translatable="false">Facebook not installed or outdated</string>
+
+</resources>
