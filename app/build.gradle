@@ -1,17 +1,17 @@
 buildscript {
     repositories {
-        maven { url 'http://download.crashlytics.com/maven' }
+        maven { url 'https://maven.fabric.io/public' }
     }
 
     dependencies {
-        classpath 'com.crashlytics.tools.gradle:crashlytics-gradle:1.14.7'
+        classpath 'io.fabric.tools:gradle:1.+'
     }
 }
 apply plugin: 'com.android.application'
-apply plugin: 'crashlytics'
+apply plugin: 'io.fabric'
 
 repositories {
-    maven { url 'http://download.crashlytics.com/maven' }
+    maven { url 'https://maven.fabric.io/public' }
 }
 
 
@@ -80,6 +80,7 @@ android {
         spanish {
             applicationId android.defaultConfig.applicationId + ".spanish"
         }
+
     }
 
     buildTypes {
@@ -87,19 +88,29 @@ android {
             minifyEnabled false
             proguardFiles getDefaultProguardFile('proguard-android.txt'), 'proguard-rules.pro'
             signingConfig signingConfigs.release
+            buildConfigField "boolean", "HAS_SOCIAL_SHARING", "true"
+        }
+
+        bbRelease.initWith(release)
+        bbRelease {
+            applicationIdSuffix ".bb"
+            versionNameSuffix ".bb"
+            buildConfigField "boolean", "HAS_SOCIAL_SHARING", "false"
         }
 
         debug {
             minifyEnabled false
             proguardFiles getDefaultProguardFile('proguard-android.txt'), 'proguard-rules.pro'
+            buildConfigField "boolean", "HAS_SOCIAL_SHARING", "true"
         }
     }
 }
 
 dependencies {
     compile fileTree(dir: 'libs', include: ['*.jar'])
-    compile 'com.android.support:appcompat-v7:21.0.3'
-    compile 'com.crashlytics.android:crashlytics:1.1.13'
+    compile 'com.android.support:appcompat-v7:22.2.1'
     compile 'com.facebook.android:facebook-android-sdk:3.21.1'
-    compile 'com.readystatesoftware.systembartint:systembartint:1.0.3'
+    compile('com.crashlytics.sdk.android:crashlytics:2.5.0@aar') {
+        transitive = true;
+    }
 }

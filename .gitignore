@@ -1,8 +1,7 @@
 .gradle
-/local.properties
-/.idea/workspace.xml
-/.idea/libraries
+local.properties
+.idea/*
 .DS_Store
-/build
+build
 key/*.*
 signing.properties

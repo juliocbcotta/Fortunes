@@ -9,9 +9,9 @@ import android.net.Uri;
 import android.os.Bundle;
 import android.support.v4.view.MenuItemCompat;
 import android.support.v7.app.ActionBarActivity;
+import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.ShareActionProvider;
 import android.text.TextUtils;
-import android.util.Log;
 import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
@@ -23,16 +23,16 @@ import com.crashlytics.android.Crashlytics;
 import com.facebook.AppEventsLogger;
 import com.facebook.UiLifecycleHelper;
 import com.facebook.widget.FacebookDialog;
+import com.linux.fortunes.app.BuildConfig;
 import com.linux.fortunes.app.FortunesApplication;
 import com.linux.fortunes.app.R;
 import com.linux.fortunes.bean.FortuneBean;
 import com.linux.fortunes.model.Fortune;
-import com.readystatesoftware.systembartint.SystemBarTintManager;
 
 import org.apache.http.protocol.HTTP;
 
 
-public class MainActivity extends ActionBarActivity implements View.OnClickListener {
+public class MainActivity extends AppCompatActivity implements View.OnClickListener {
 
     private TextView mFortuneText;
     private ProgressBar mProgressBar;
@@ -69,12 +69,6 @@ public class MainActivity extends ActionBarActivity implements View.OnClickListe
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
-        // create our manager instance after the content view is set
-        SystemBarTintManager tintManager = new SystemBarTintManager(this);
-        // enable status bar tint
-        tintManager.setStatusBarTintEnabled(true);
-        // set a custom tint color for all system bars
-        tintManager.setTintColor(getResources().getColor(R.color.primary_dark));
 
         uiHelper = new UiLifecycleHelper(this, null);
         uiHelper.onCreate(savedInstanceState);
@@ -103,12 +97,13 @@ public class MainActivity extends ActionBarActivity implements View.OnClickListe
             loadFortune();
         }
 
+        findViewById(R.id.horizontal_scroll_view).setVisibility(BuildConfig.HAS_SOCIAL_SHARING ? View.VISIBLE : View.GONE);
+
     }
 
     @Override
     protected void onNewIntent(Intent intent) {
         super.onNewIntent(intent);
-
         if (intent != null && intent.getExtras() != null) {
             setIntent(intent);
             mFortune = (Fortune) intent.getSerializableExtra(FortuneBean.TABLE_NAME);

@@ -25,13 +25,17 @@ public class FortunesAppWidgetProvider extends AppWidgetProvider {
             if (fortune == null) {
                 fortune = FortuneBean.getRandomFortune();
             }
-            onUpdate(context, fortune);
+            if (fortune != null) {
+                onUpdate(context, fortune);
+            }
         }
     }
 
     public void onUpdate(Context context, AppWidgetManager appWidgetManager, int[] appWidgetIds) {
         Fortune fortune = FortuneBean.getRandomFortune();
-        updateWidgets(context, appWidgetManager, appWidgetIds, fortune);
+        if (fortune != null) {
+            updateWidgets(context, appWidgetManager, appWidgetIds, fortune);
+        }
     }
 
     private void updateWidgets(Context context, AppWidgetManager appWidgetManager, int[] appWidgetIds, Fortune fortune) {
@@ -78,9 +82,7 @@ public class FortunesAppWidgetProvider extends AppWidgetProvider {
 
         // Uses getClass().getName() rather than MyWidget.class.getName() for
         // portability into any App Widget Provider Class
-        ComponentName thisAppWidgetComponentName =
-                new ComponentName(context.getPackageName(), getClass().getName()
-                );
+        ComponentName thisAppWidgetComponentName = new ComponentName(context.getPackageName(), getClass().getName());
         int[] appWidgetIds = appWidgetManager.getAppWidgetIds(
                 thisAppWidgetComponentName);
         updateWidgets(context, appWidgetManager, appWidgetIds, fortune);

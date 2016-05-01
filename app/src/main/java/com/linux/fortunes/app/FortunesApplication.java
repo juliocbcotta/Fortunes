@@ -11,6 +11,7 @@ import com.linux.fortunes.bean.FortuneBean;
 import com.linux.fortunes.db.DBManager;
 import com.linux.fortunes.model.Fortune;
 
+import io.fabric.sdk.android.Fabric;
 import java.io.BufferedReader;
 import java.io.IOException;
 import java.io.InputStream;
@@ -28,7 +29,7 @@ public class FortunesApplication extends Application {
     @Override
     public void onCreate() {
         super.onCreate();
-        Crashlytics.start(this);
+        Fabric.with(this, new Crashlytics());
         // initialize intent filter of widget based on the main package
         ACTION_UPDATE_CLICK = getPackageName() + ACTION_UPDATE_CLICK;
 
